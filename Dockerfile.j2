@@ -1,0 +1,34 @@
+FROM {{ PLANGRID_DOCKER_REPO }}/pg-docker:master
+
+LABEL maintainer="plangrid"
+
+## Install our dependencies
+RUN apt-get update \
+    && apt-get -y install \
+        build-essential \
+        git \
+        libxml2-dev \
+        libxslt1-dev \
+        openssh-client \
+        texlive-fonts-recommended \
+        texlive-latex-base \
+        texlive-latex-extra \
+        texlive-latex-recommended \
+        zlib1g-dev
+
+WORKDIR /usr/src/app/readthedocs.org
+
+## Install the python deps
+RUN pip3 install --upgrade setuptools==19.2
+COPY readthedocs.org/requirements.txt ./
+COPY readthedocs.org/requirements/ ./requirements/
+RUN pip3 install -r requirements.txt
+
+## Move over our hotfix for Version links
+COPY conf.py.tmpl ./readthedocs/doc_builder/templates/doc_builder/conf.py.tmpl
+
+## Make sure we have the right host
+RUN echo "127.0.0.1 docs.planfront.net" >> /etc/hosts
+
+## This is a volume for our database
+CMD ["./entrypoint.sh", "runserver", "0.0.0.0:80"]
