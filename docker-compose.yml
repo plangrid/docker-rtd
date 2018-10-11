@@ -18,7 +18,7 @@ services:
             - /mnt/rtd/user_builds:/usr/src/app/readthedocs.org/user_builds
         environment:
             - "TEST_DATA=no"
-            - "RTD_PRODUCTION_DOMAIN=docs.planfront.net:80"
+            - "RTD_PRODUCTION_DOMAIN=docs.planfront.net"
         extra_hosts:
             - "docs.planfront.net:0.0.0.0"
         links:
