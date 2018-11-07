@@ -18,6 +18,8 @@ DB_LOCATION=${DB_LOCATION:-/persistent/dev.db}
 NEW_INSTALL=${NEW_INSTALL:-no}
 TEST_DATA=${TEST_DATA:-no}
 
+#connect to redis
+#src/redis-cli -c -h $DB_LOCATION -p 6379
 
 setupdb() {
     # deploy the database

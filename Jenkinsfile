@@ -7,15 +7,31 @@ node {
             $class: 'GitSCM',
             gitTool: 'native git',
             branches: scm.branches,
+            env.PROJECT_NAME='docs',
+            env.GIT_BRANCH = env.BRANCH_NAME,
             doGenerateSubmoduleConfigurations: false,
             extensions: [
                 [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]
             ],
             userRemoteConfigs: scm.userRemoteConfigs
+            if (! env.DOCKER_IMAGE_BASE) {
+            env.DOCKER_IMAGE_BASE = "${PROJECT_NAME}:${GIT_COMMIT}"
+        }
         ])
     }
 
-    stage('build') {
-        sh "docker-compose build"
-    }
+    stage('Build Docker') {
+            ansiColor('xterm') {
+                retry(3) {
+                    sh '/opt/plangrid/build-tools/bin/build-docker'
+                }
+            }
+        }
+        stage('Push Docker') {
+            ansiColor('xterm') {
+                retry(3) {
+                    sh '/opt/plangrid/build-tools/bin/push-docker'
+                }
+            }
+        }
 }

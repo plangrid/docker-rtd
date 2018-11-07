@@ -1,9 +1,19 @@
 FROM ubuntu:18.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive 
+
+EXPOSE 9000
 RUN apt-get update && apt-get install -y tzdata \
     && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
     && dpkg-reconfigure --frontend noninteractive tzdata
+
+##Connect to redis cluster
+#RUN sudo yum install gcc \
+#    && wget http://download.redis.io/redis-stable.tar.gz \
+#    && tar xvzf redis-stable.tar.gz \
+#    && cd redis-stable \
+#    && make distclean \
+#    && make
 
 ## Install our dependencies
 RUN apt-get update \
@@ -54,6 +64,6 @@ RUN echo "0.0.0.0 docs.planfront.net" >> /etc/hosts
 
 ## This is a volume for our database
 VOLUME ["/persistent"]
-CMD ["./entrypoint.sh", "runserver", "0.0.0.0:80"]
+CMD ["./entrypoint.sh", "runserver", "0.0.0.0:9000"]
 
 RUN echo 'app-git-hash: c6c2824ec789bdfbd5bd25fd7a2921f8f7e6f495' >> /etc/docker-metadata
