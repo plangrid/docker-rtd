@@ -14,9 +14,6 @@ node {
                 [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]
             ],
             userRemoteConfigs: scm.userRemoteConfigs
-            if (! env.DOCKER_IMAGE_BASE) {
-            env.DOCKER_IMAGE_BASE = "${PROJECT_NAME}:${GIT_COMMIT}"
-        }
         ])
     }
 
