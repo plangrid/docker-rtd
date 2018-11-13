@@ -65,6 +65,6 @@ RUN echo "0.0.0.0 docs.planfront.net" >> /etc/hosts
 ## This is a volume for our database
 VOLUME ["/persistent"]
 #this doesnt run fix it and ur good, i think lol
-CMD ["entrypoint.sh", "runserver", "0.0.0.0:9000"]
+CMD ["/usr/src/app/readthedocs.org/entrypoint.sh", "runserver", "0.0.0.0:9000"]
 
 RUN echo 'app-git-hash: c6c2824ec789bdfbd5bd25fd7a2921f8f7e6f495' >> /etc/docker-metadata
