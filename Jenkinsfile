@@ -15,18 +15,6 @@ node {
         ])
     }
 
-    stage('Build Docker') {
-            ansiColor('xterm') {
-                retry(3) {
-                    sh '/opt/plangrid/build-tools/bin/build-docker'
-                }
-            }
-        }
-        stage('Push Docker') {
-            ansiColor('xterm') {
-                retry(3) {
-                    sh '/opt/plangrid/build-tools/bin/push-docker'
-                }
-            }
-        }
+    BuildDocker()
+    PushDocker()
 }
