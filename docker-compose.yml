@@ -1,4 +1,4 @@
-version: "2"
+version: "2.2"
 services:
     rtd:
         hostname: docs.planfront.net
