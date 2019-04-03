@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-ARG rtd_slumber_password
-ENV RTD_SLUMBER_PASSWORD=$rtd_slumber_password
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y tzdata \
     && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
