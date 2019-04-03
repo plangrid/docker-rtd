@@ -3,7 +3,7 @@
 ##
 #
 # Runtime execution that needs to run after container launch.
-# We basically setup the db for the first time, create our user, and 
+# We basically setup the db for the first time, create our user, and
 #
 ##
 ## Collect Variables
@@ -17,14 +17,14 @@ DB_LOCATION=${DB_LOCATION:-/persistent/dev.db}
 
 NEW_INSTALL=${NEW_INSTALL:-no}
 TEST_DATA=${TEST_DATA:-no}
-
+RTD_SLUMBER_PASSWORD=${RTD_SLUMBER_PASSWORD:-"admin"}
 
 setupdb() {
     # deploy the database
     python ./manage.py migrate
 
     # create superuser
-    echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'admin')" | python ./manage.py shell
+    echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', '${RTD_SLUMBER_PASSWORD}')" | python ./manage.py shell
 
     if [ "$TEST_DATA" == "yes" ]; then
         python ./manage.py loaddata test_data
