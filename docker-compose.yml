@@ -39,7 +39,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.elasticsearch
-        command: elasticsearch -Des.network.host=0.0.0.0
+        command: "elasticsearch -E es.network.host=0.0.0.0 -E discovery.type=single-node"
         ports:
             - "9200:9200"
             - "9300:9300"
