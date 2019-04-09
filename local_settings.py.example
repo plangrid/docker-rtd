@@ -30,6 +30,9 @@ DATABASES = {
     }
 }
 
+# Elasticsearch settings
+ELASTICSEARCH_DSL_AUTOSYNC = True
+
 # Reset the django logging to be sutiable for Docker use, by having everything
 # go to stdout, and also allow us to set them to DEBUG if we want
 LOG_FORMAT = "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s"
