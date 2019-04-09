@@ -5,13 +5,9 @@ persistent*
 id_rsa*
 keys*
 key/
-
 # compose file (may have variables we don't want public)
 *.yml
 *.yaml
-
-# submodule
-readthedocs.org/*
 
 local_settings.py
 db/
